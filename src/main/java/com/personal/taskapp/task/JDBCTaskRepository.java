@@ -32,12 +32,7 @@ public class JDBCTaskRepository implements TaskRepository {
     public void create(Task task) {
         var updated = jdbcClient.sql("INSERT INTO task(id,task_title,started_on,completed_on,time_set) values(?,?,?,?,?)")
                 .params(List.of(
-                task.id(),
-                task.taskTitle(),
-                task.startedOn(),
-                task.completedOn(),
-                task.timeSet().toString()))
-                .update();
+                task.id(),task.taskTitle(),task.startedOn(),task.completedOn(),task.timeSet().toString())).update();
 
         Assert.state(updated == 1, "Failed to create task " + task.taskTitle());
     }
